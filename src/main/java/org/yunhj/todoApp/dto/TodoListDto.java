@@ -4,6 +4,10 @@ import lombok.Data;
 
 @Data
 public class TodoListDto {
+
+    /** todoList 이용자 seq */
+    private int userSeq;
+
     /** todoList id */
     private int id;
 
@@ -11,11 +15,12 @@ public class TodoListDto {
     private String title;
 
     /** todoList 내용 */
-    private String TEXT;
+    private String description;
 
     /** todoList 완료유무 */
-    private boolean is_completed;
+    private boolean completed;
 
     /** todoList 완료일자 */
-    private String reminder_time;
+    private String reminderTime;
+
 }

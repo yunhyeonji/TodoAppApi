@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yunhj.todoApp.repository.TodoListRepository">
+
+    <!-- id 및 날짜 별 일정 리스트 표출 -->
+    <select id="selectTodoList" resultType="org.yunhj.todoApp.dto.TodoListDto">
+        SELECT
+            USER_SEQ AS userSeq,
+            TITLE,
+            DESCRIPTION,
+            REMINDER_TIME AS reminderTime,
+            IS_COMPLETED AS completed
+        FROM TODOS T
+        WHERE USER_SEQ = #{userSeq}
+        <if test="reminderTime != null and reminderTime != ''">
+            AND DATE_FORMAT(STR_TO_DATE(REMINDER_TIME, '%Y%M%D%H%I'), '%Y-%M-%D') = DATE_FORMAT(NOW(), '%Y-%M-%D')
+        </if>
+        ORDER BY REMINDER_TIME;
+    </select>
+
+    <!-- 사용자 일정 추가 -->
+    <insert id="createTodo">
+        INSERT INTO TODOS (USER_SEQ, TITLE, DESCRIPTION, REMINDER_TIME)
+        VALUES (
+            #{userSeq},
+            #{title},
+            #{description},
+            #{reminderTime}
+        )
+    </insert>
+
+    <!-- 사용자 일정 업데이트 -->
+    <update id="updateTodo">
+        UPDATE TODOS
+        <set>
+            <!-- 일정 제목 변경 -->
+            <if test="title != null and title != ''">
+                TITLE = #{title},
+            </if>
+            <!-- 일정 상세정보 변경 -->
+            <if test="description != null and description != ''">
+                DESCRIPTION = #{description},
+            </if>
+            <!-- 완료 상태 값 변경 -->
+            <if test="completed != null">
+                IS_COMPLETED = #{completed},
+            </if>
+            <!-- 일정 완료일 변경 -->
+            <if test="reminderTime != null and reminderTime != ''">
+                REMINDER_TIME = #{reminderTime},
+            </if>
+        </set>
+        WHERE USER_SEQ = #{userSeq} AND ID = #{id}
+    </update>
+
+    <!-- 사용자 일정 삭제 -->
+    <delete id="deleteTodo">
+        DELETE FROM TODOS
+        WHERE USER_SEQ = #{userSeq} AND ID = #{id}
+    </delete>
+</mapper>

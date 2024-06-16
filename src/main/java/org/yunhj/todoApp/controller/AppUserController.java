@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import org.yunhj.todoApp.dto.UserDto;
 import org.yunhj.todoApp.service.UserServiceImpl;
 
-
+/**
+ * 사용자 관련 컨트롤러
+ * 담당자 : 윤현지
+ */
 
 @RestController
 public class AppUserController {
@@ -19,7 +22,7 @@ public class AppUserController {
         return userService.signIn(userDto);
     }
 
-    /** 로그인 기능 */
+   /** 로그인 기능 */
     @PostMapping("/logIn")
     public UserDto logIn(@RequestBody UserDto userDto) {
         return userService.logIn(userDto);
