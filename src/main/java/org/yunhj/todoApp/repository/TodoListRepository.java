@@ -12,6 +12,9 @@ public interface TodoListRepository {
     /* 일정 리스트 select */
     List<TodoListDto> selectTodoList(TodoListDto todoListDto);
 
+    /* 일정 진행률 확인 */
+    TodoListDto selectPercentage(TodoListDto todoListDto);
+
     /* 일정 추가 기능 */
     int createTodo(TodoListDto todoListDto);
 

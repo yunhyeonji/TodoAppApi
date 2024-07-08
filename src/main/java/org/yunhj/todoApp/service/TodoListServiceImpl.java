@@ -19,6 +19,11 @@ public class TodoListServiceImpl implements TodoListService{
         return todoListRepository.selectTodoList(todoListDto);
     }
 
+    @Override
+    public TodoListDto selectPercentage(TodoListDto todoListDto) {
+        return todoListRepository.selectPercentage(todoListDto);
+    }
+
     /** todolist 추가 기능 */
     @Override
     public boolean createTodo(TodoListDto todoListDto) {

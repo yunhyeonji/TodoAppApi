@@ -9,6 +9,9 @@ public interface TodoListService {
     /** 사용자, 날짜별 리스트 표출 */
     List<TodoListDto> selectTodoList(TodoListDto todoListDto);
 
+    /** 일정 진행률 확인 */
+    TodoListDto selectPercentage(TodoListDto todoListDto);
+
     /** 일정 생성 */
     boolean createTodo(TodoListDto todoListDto);
 

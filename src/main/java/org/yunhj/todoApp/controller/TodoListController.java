@@ -27,6 +27,10 @@ public class TodoListController {
         return todoListService.selectTodoList(todoListDto);
     }
 
+    /** 일정 진행률 확인 */
+    @GetMapping("/selectPercentage")
+    public TodoListDto selectPercentage(TodoListDto todoListDto){ return todoListService.selectPercentage(todoListDto); }
+
     /** 일정 추가 기능 */
     @PostMapping("/insertTodo")
     public boolean insertTodo(@RequestBody TodoListDto todoListDto){
